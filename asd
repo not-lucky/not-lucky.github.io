@@ -1,0 +1,1 @@
+rclone move --checkers=10 --multi-thread-cutoff=10M --multi-thread-streams=10 -P --stats=1s --retries=10 --use-mmap --buffer-size=200M --fast-list --drive-chunk-size=128M --drive-acknowledge-abuse --transfers=10 emfyr: ./Downloads/rclone/emfyr

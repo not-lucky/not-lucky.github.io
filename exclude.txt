@@ -1,0 +1,8 @@
+Scans/**
+scans/**
+Scan/**
+scan/**
+SCANS/**
+Booklet/**
+booklet/**
+BOOKLET/**

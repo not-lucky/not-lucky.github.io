@@ -1,0 +1,1720 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>file.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h2 id="file-categoriesjson">file categories.json</h2>
+<pre class="hljs"><code><div>
+[
+    {
+        <span class="hljs-string">"id"</span>: <span class="hljs-number">9</span>,
+        <span class="hljs-string">"name"</span>: <span class="hljs-string">"General Knowledge"</span>
+    },
+    {
+        <span class="hljs-string">"id"</span>: <span class="hljs-number">10</span>,
+        <span class="hljs-string">"name"</span>: <span class="hljs-string">"Entertainment: Books"</span>
+    },
+    {
+        <span class="hljs-string">"id"</span>: <span class="hljs-number">11</span>,
+        <span class="hljs-string">"name"</span>: <span class="hljs-string">"Entertainment: Film"</span>
+    },
+    {
+        <span class="hljs-string">"id"</span>: <span class="hljs-number">12</span>,
+        <span class="hljs-string">"name"</span>: <span class="hljs-string">"Entertainment: Music"</span>
+    },
+    {
+        <span class="hljs-string">"id"</span>: <span class="hljs-number">13</span>,
+        <span class="hljs-string">"name"</span>: <span class="hljs-string">"Entertainment: Musicals &amp; Theatres"</span>
+    },
+    {
+        <span class="hljs-string">"id"</span>: <span class="hljs-number">14</span>,
+        <span class="hljs-string">"name"</span>: <span class="hljs-string">"Entertainment: Television"</span>
+    },
+    {
+        <span class="hljs-string">"id"</span>: <span class="hljs-number">15</span>,
+        <span class="hljs-string">"name"</span>: <span class="hljs-string">"Entertainment: Video Games"</span>
+    },
+    {
+        <span class="hljs-string">"id"</span>: <span class="hljs-number">16</span>,
+        <span class="hljs-string">"name"</span>: <span class="hljs-string">"Entertainment: Board Games"</span>
+    },
+    {
+        <span class="hljs-string">"id"</span>: <span class="hljs-number">17</span>,
+        <span class="hljs-string">"name"</span>: <span class="hljs-string">"Science &amp; Nature"</span>
+    },
+    {
+        <span class="hljs-string">"id"</span>: <span class="hljs-number">18</span>,
+        <span class="hljs-string">"name"</span>: <span class="hljs-string">"Science: Computers"</span>
+    },
+    {
+        <span class="hljs-string">"id"</span>: <span class="hljs-number">19</span>,
+        <span class="hljs-string">"name"</span>: <span class="hljs-string">"Science: Mathematics"</span>
+    },
+    {
+        <span class="hljs-string">"id"</span>: <span class="hljs-number">20</span>,
+        <span class="hljs-string">"name"</span>: <span class="hljs-string">"Mythology"</span>
+    },
+    {
+        <span class="hljs-string">"id"</span>: <span class="hljs-number">21</span>,
+        <span class="hljs-string">"name"</span>: <span class="hljs-string">"Sports"</span>
+    },
+    {
+        <span class="hljs-string">"id"</span>: <span class="hljs-number">22</span>,
+        <span class="hljs-string">"name"</span>: <span class="hljs-string">"Geography"</span>
+    },
+    {
+        <span class="hljs-string">"id"</span>: <span class="hljs-number">23</span>,
+        <span class="hljs-string">"name"</span>: <span class="hljs-string">"History"</span>
+    },
+    {
+        <span class="hljs-string">"id"</span>: <span class="hljs-number">24</span>,
+        <span class="hljs-string">"name"</span>: <span class="hljs-string">"Politics"</span>
+    },
+    {
+        <span class="hljs-string">"id"</span>: <span class="hljs-number">25</span>,
+        <span class="hljs-string">"name"</span>: <span class="hljs-string">"Art"</span>
+    },
+    {
+        <span class="hljs-string">"id"</span>: <span class="hljs-number">26</span>,
+        <span class="hljs-string">"name"</span>: <span class="hljs-string">"Celebrities"</span>
+    },
+    {
+        <span class="hljs-string">"id"</span>: <span class="hljs-number">27</span>,
+        <span class="hljs-string">"name"</span>: <span class="hljs-string">"Animals"</span>
+    },
+    {
+        <span class="hljs-string">"id"</span>: <span class="hljs-number">28</span>,
+        <span class="hljs-string">"name"</span>: <span class="hljs-string">"Vehicles"</span>
+    },
+    {
+        <span class="hljs-string">"id"</span>: <span class="hljs-number">29</span>,
+        <span class="hljs-string">"name"</span>: <span class="hljs-string">"Entertainment: Comics"</span>
+    },
+    {
+        <span class="hljs-string">"id"</span>: <span class="hljs-number">30</span>,
+        <span class="hljs-string">"name"</span>: <span class="hljs-string">"Science: Gadgets"</span>
+    },
+    {
+        <span class="hljs-string">"id"</span>: <span class="hljs-number">31</span>,
+        <span class="hljs-string">"name"</span>: <span class="hljs-string">"Entertainment: Japanese Anime &amp; Manga"</span>
+    },
+    {
+        <span class="hljs-string">"id"</span>: <span class="hljs-number">32</span>,
+        <span class="hljs-string">"name"</span>: <span class="hljs-string">"Entertainment: Cartoon &amp; Animations"</span>
+    }
+]
+</div></code></pre>
+<h2 id="file-homejsx">file Home.jsx</h2>
+<pre class="hljs"><code><div>
+<span class="hljs-keyword">import</span> { useState } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { QuizContext } <span class="hljs-keyword">from</span> <span class="hljs-string">'./components/QuizContext.jsx'</span>;
+
+<span class="hljs-keyword">import</span> <span class="hljs-string">"./css/App.css"</span>
+<span class="hljs-keyword">import</span> Header <span class="hljs-keyword">from</span> <span class="hljs-string">'./components/Header.jsx'</span>;
+
+<span class="hljs-keyword">import</span> {
+    BrowserRouter <span class="hljs-keyword">as</span> Router,
+    Routes, Route
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'react-router-dom'</span>
+
+<span class="hljs-keyword">import</span> Quiz <span class="hljs-keyword">from</span> <span class="hljs-string">'./Quiz.jsx'</span>
+<span class="hljs-keyword">import</span> QuizForm <span class="hljs-keyword">from</span> <span class="hljs-string">'./components/QuizForm.jsx'</span>;
+
+<span class="hljs-keyword">const</span> Home = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+    <span class="hljs-keyword">const</span> [quiz, setQuiz] = useState({ <span class="hljs-attr">response_code</span>: <span class="hljs-number">-1</span>, <span class="hljs-attr">results</span>: [] });
+
+    <span class="hljs-keyword">return</span> (
+
+        <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">QuizContext.Provider</span> <span class="hljs-attr">value</span>=<span class="hljs-string">{</span> { <span class="hljs-attr">quiz</span>, <span class="hljs-attr">setQuiz</span> } }&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">Header</span> /&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">Router</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">Routes</span>&gt;</span>
+
+                    <span class="hljs-tag">&lt;<span class="hljs-name">Route</span> <span class="hljs-attr">exact</span> <span class="hljs-attr">path</span>=<span class="hljs-string">"/quiz"</span> <span class="hljs-attr">element</span>=<span class="hljs-string">{</span> &lt;<span class="hljs-attr">QuizForm</span> /&gt;</span> }&gt;
+                    <span class="hljs-tag">&lt;/<span class="hljs-name">Route</span>&gt;</span>
+
+                    <span class="hljs-tag">&lt;<span class="hljs-name">Route</span> <span class="hljs-attr">path</span>=<span class="hljs-string">"/quiz/:quizId"</span> <span class="hljs-attr">element</span>=<span class="hljs-string">{</span> &lt;<span class="hljs-attr">Quiz</span> /&gt;</span> }&gt;
+                    <span class="hljs-tag">&lt;/<span class="hljs-name">Route</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">Routes</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">Router</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">QuizContext.Provider</span>&gt;</span></span>
+    )
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Home;
+</div></code></pre>
+<h2 id="file-mainjsx">file main.jsx</h2>
+<pre class="hljs"><code><div>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>
+<span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">'react-dom/client'</span>
+<span class="hljs-comment">// import App from './App.jsx'</span>
+<span class="hljs-keyword">import</span> App <span class="hljs-keyword">from</span> <span class="hljs-string">'./Home.jsx'</span>
+<span class="hljs-keyword">import</span> <span class="hljs-string">'./css/index.css'</span>
+
+ReactDOM.createRoot(<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'root'</span>)).render(
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">React.StrictMode</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">App</span> /&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">React.StrictMode</span>&gt;</span></span>,
+)
+
+</div></code></pre>
+<h2 id="file-mongojs">file mongo.js</h2>
+<pre class="hljs"><code><div>
+<span class="hljs-comment">// import mongoose from 'mongoose';</span>
+
+
+<span class="hljs-comment">// // if (process.argv.length &lt; 3) {</span>
+<span class="hljs-comment">// //     console.log('give password as argument')</span>
+<span class="hljs-comment">// //     process.exit(1)</span>
+<span class="hljs-comment">// // }</span>
+
+<span class="hljs-comment">// const password = "Y1Qr36WZ3zYb2Y35"</span>
+
+<span class="hljs-comment">// const url =</span>
+<span class="hljs-comment">//     `mongodb+srv://notLucky:${password}@cluster0.3udo78v.mongodb.net/?retryWrites=true&amp;w=majority`</span>
+
+
+<span class="hljs-comment">// mongoose.set('strictQuery', false)</span>
+<span class="hljs-comment">// mongoose.connect(url)</span>
+
+<span class="hljs-comment">// const noteSchema = new mongoose.Schema({</span>
+<span class="hljs-comment">//     content: String,</span>
+<span class="hljs-comment">//     important: Boolean,</span>
+<span class="hljs-comment">// })</span>
+
+<span class="hljs-comment">// const Note = mongoose.model('Note', noteSchema)</span>
+
+<span class="hljs-comment">// const note = new Note({</span>
+<span class="hljs-comment">//     content: 'wowo',</span>
+<span class="hljs-comment">//     important: false,</span>
+<span class="hljs-comment">// })</span>
+
+<span class="hljs-comment">// note.save().then(result =&gt; {</span>
+<span class="hljs-comment">//     console.log('note saved!')</span>
+<span class="hljs-comment">//     mongoose.connection.close()</span>
+<span class="hljs-comment">// })</span>
+
+<span class="hljs-comment">// import axios from "axios";</span>
+<span class="hljs-comment">// import fs from 'fs';</span>
+
+<span class="hljs-comment">// // Replace 'your_api_endpoint' with the actual endpoint you want to call</span>
+<span class="hljs-comment">// axios.get('https://opentdb.com/api.php?amount=10&amp;encode=base64')</span>
+<span class="hljs-comment">//   .then(response =&gt; {</span>
+<span class="hljs-comment">//     // Convert the JSON object to a string</span>
+<span class="hljs-comment">//     const data = JSON.stringify(response.data, null, 2);</span>
+
+<span class="hljs-comment">//     // Write the string to a file</span>
+<span class="hljs-comment">//     fs.writeFile('output.json', data, (err) =&gt; {</span>
+<span class="hljs-comment">//       if (err) {</span>
+<span class="hljs-comment">//         console.error(err);</span>
+<span class="hljs-comment">//       } else {</span>
+<span class="hljs-comment">//         console.log('Data written to file');</span>
+<span class="hljs-comment">//       }</span>
+<span class="hljs-comment">//     });</span>
+<span class="hljs-comment">//   })</span>
+<span class="hljs-comment">//   .catch(error =&gt; {</span>
+<span class="hljs-comment">//     console.error(error);</span>
+<span class="hljs-comment">//   });</span>
+
+<span class="hljs-keyword">import</span> quiz <span class="hljs-keyword">from</span> <span class="hljs-string">'./output.json'</span> assert { <span class="hljs-attr">type</span>: <span class="hljs-string">'json'</span> };
+<span class="hljs-keyword">import</span> categories <span class="hljs-keyword">from</span> <span class="hljs-string">'./categories.json'</span> assert { <span class="hljs-attr">type</span>: <span class="hljs-string">'json'</span> };
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">shuffle</span>(<span class="hljs-params">array</span>) </span>{
+    <span class="hljs-keyword">let</span> currentIndex = array.length, randomIndex;
+
+    <span class="hljs-comment">// While there remain elements to shuffle.</span>
+    <span class="hljs-keyword">while</span> (currentIndex &gt; <span class="hljs-number">0</span>) {
+
+        <span class="hljs-comment">// Pick a remaining element.</span>
+        randomIndex = <span class="hljs-built_in">Math</span>.floor(<span class="hljs-built_in">Math</span>.random() * currentIndex);
+        currentIndex--;
+
+        <span class="hljs-comment">// And swap it with the current element.</span>
+        [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex], array[currentIndex]];
+    }
+
+    <span class="hljs-keyword">return</span> array;
+}
+
+<span class="hljs-comment">// console.log('data', categories)</span>
+<span class="hljs-comment">// console.log('quiz', quiz)</span>
+<span class="hljs-built_in">console</span>.log(shuffle(quiz.results[<span class="hljs-number">0</span>].incorrect_answers.concat(quiz.results[<span class="hljs-number">0</span>].correct_answer)))
+</div></code></pre>
+<h2 id="file-outputjson">file output.json</h2>
+<pre class="hljs"><code><div>
+[
+  {
+    <span class="hljs-string">"type"</span>: <span class="hljs-string">"Ym9vbGVhbg=="</span>,
+    <span class="hljs-string">"difficulty"</span>: <span class="hljs-string">"bWVkaXVt"</span>,
+    <span class="hljs-string">"category"</span>: <span class="hljs-string">"U2NpZW5jZSAmIE5hdHVyZQ=="</span>,
+    <span class="hljs-string">"question"</span>: <span class="hljs-string">"VGhlIERvcHBsZXIgZWZmZWN0IGFwcGxpZXMgdG8gbGlnaHQu"</span>,
+    <span class="hljs-string">"correct_answer"</span>: <span class="hljs-string">"VHJ1ZQ=="</span>,
+    <span class="hljs-string">"incorrect_answers"</span>: [
+      <span class="hljs-string">"RmFsc2U="</span>
+    ],
+    <span class="hljs-string">"options"</span>: [
+      <span class="hljs-string">"RmFsc2U="</span>,
+      <span class="hljs-string">"VHJ1ZQ=="</span>
+    ]
+  },
+  {
+    <span class="hljs-string">"type"</span>: <span class="hljs-string">"bXVsdGlwbGU="</span>,
+    <span class="hljs-string">"difficulty"</span>: <span class="hljs-string">"bWVkaXVt"</span>,
+    <span class="hljs-string">"category"</span>: <span class="hljs-string">"U2NpZW5jZSAmIE5hdHVyZQ=="</span>,
+    <span class="hljs-string">"question"</span>: <span class="hljs-string">"T24gd2hpY2ggbWlzc2lvbiBkaWQgdGhlIFNwYWNlIFNodXR0bGUgQ29sdW1iaWEgYnJlYWsgdXAgdXBvbiByZS1lbnRyeT8="</span>,
+    <span class="hljs-string">"correct_answer"</span>: <span class="hljs-string">"U1RTLTEwNw=="</span>,
+    <span class="hljs-string">"incorrect_answers"</span>: [
+      <span class="hljs-string">"U1RTLTUxLUw="</span>,
+      <span class="hljs-string">"U1RTLTYxLUM="</span>,
+      <span class="hljs-string">"U1RTLTEwOQ=="</span>
+    ],
+    <span class="hljs-string">"options"</span>: [
+      <span class="hljs-string">"U1RTLTUxLUw="</span>,
+      <span class="hljs-string">"U1RTLTYxLUM="</span>,
+      <span class="hljs-string">"U1RTLTEwOQ=="</span>,
+      <span class="hljs-string">"U1RTLTEwNw=="</span>
+    ]
+  },
+  {
+    <span class="hljs-string">"type"</span>: <span class="hljs-string">"bXVsdGlwbGU="</span>,
+    <span class="hljs-string">"difficulty"</span>: <span class="hljs-string">"bWVkaXVt"</span>,
+    <span class="hljs-string">"category"</span>: <span class="hljs-string">"U2NpZW5jZSAmIE5hdHVyZQ=="</span>,
+    <span class="hljs-string">"question"</span>: <span class="hljs-string">"V2hvIG1hZGUgdGhlIGRpc2NvdmVyeSBvZiBYLXJheXM/"</span>,
+    <span class="hljs-string">"correct_answer"</span>: <span class="hljs-string">"V2lsaGVsbSBDb25yYWQgUsO2bnRnZW4="</span>,
+    <span class="hljs-string">"incorrect_answers"</span>: [
+      <span class="hljs-string">"VGhvbWFzIEFsdmEgRWRpc29u"</span>,
+      <span class="hljs-string">"SmFtZXMgV2F0dA=="</span>,
+      <span class="hljs-string">"QWxiZXJ0IEVpbnN0ZWlu"</span>
+    ],
+    <span class="hljs-string">"options"</span>: [
+      <span class="hljs-string">"VGhvbWFzIEFsdmEgRWRpc29u"</span>,
+      <span class="hljs-string">"SmFtZXMgV2F0dA=="</span>,
+      <span class="hljs-string">"QWxiZXJ0IEVpbnN0ZWlu"</span>,
+      <span class="hljs-string">"V2lsaGVsbSBDb25yYWQgUsO2bnRnZW4="</span>
+    ]
+  },
+  {
+    <span class="hljs-string">"type"</span>: <span class="hljs-string">"bXVsdGlwbGU="</span>,
+    <span class="hljs-string">"difficulty"</span>: <span class="hljs-string">"bWVkaXVt"</span>,
+    <span class="hljs-string">"category"</span>: <span class="hljs-string">"U2NpZW5jZSAmIE5hdHVyZQ=="</span>,
+    <span class="hljs-string">"question"</span>: <span class="hljs-string">"V2hhdCBhcmUgdGhlIHNtYWxsZXN0IGJsb29kIHZlc3NlbHMgaW4gdGhlIGh1bWFuIGJvZHk/"</span>,
+    <span class="hljs-string">"correct_answer"</span>: <span class="hljs-string">"Q2FwaWxsYXJpZXM="</span>,
+    <span class="hljs-string">"incorrect_answers"</span>: [
+      <span class="hljs-string">"QXJ0ZXJpb2xlcw=="</span>,
+      <span class="hljs-string">"VmVpbnVsZXM="</span>,
+      <span class="hljs-string">"THltcGhhdGljcw=="</span>
+    ],
+    <span class="hljs-string">"options"</span>: [
+      <span class="hljs-string">"QXJ0ZXJpb2xlcw=="</span>,
+      <span class="hljs-string">"VmVpbnVsZXM="</span>,
+      <span class="hljs-string">"THltcGhhdGljcw=="</span>,
+      <span class="hljs-string">"Q2FwaWxsYXJpZXM="</span>
+    ]
+  },
+  {
+    <span class="hljs-string">"type"</span>: <span class="hljs-string">"bXVsdGlwbGU="</span>,
+    <span class="hljs-string">"difficulty"</span>: <span class="hljs-string">"bWVkaXVt"</span>,
+    <span class="hljs-string">"category"</span>: <span class="hljs-string">"U2NpZW5jZSAmIE5hdHVyZQ=="</span>,
+    <span class="hljs-string">"question"</span>: <span class="hljs-string">"V2hpY2ggcHN5Y2hvbG9naWNhbCB0ZXJtIHJlZmVycyB0byB0aGUgc3RyZXNzIG9mIGhvbGRpbmcgY29udHJhc3RpbmcgYmVsaWVmcz8="</span>,
+    <span class="hljs-string">"correct_answer"</span>: <span class="hljs-string">"Q29nbml0aXZlIERpc3NvbmFuY2U="</span>,
+    <span class="hljs-string">"incorrect_answers"</span>: [
+      <span class="hljs-string">"RmxpcC1GbG9wIFN5bmRyb21l"</span>,
+      <span class="hljs-string">"U3BsaXQtQnJhaW4="</span>,
+      <span class="hljs-string">"QmxpbmQgU2lnaHQ="</span>
+    ],
+    <span class="hljs-string">"options"</span>: [
+      <span class="hljs-string">"RmxpcC1GbG9wIFN5bmRyb21l"</span>,
+      <span class="hljs-string">"U3BsaXQtQnJhaW4="</span>,
+      <span class="hljs-string">"QmxpbmQgU2lnaHQ="</span>,
+      <span class="hljs-string">"Q29nbml0aXZlIERpc3NvbmFuY2U="</span>
+    ]
+  },
+  {
+    <span class="hljs-string">"type"</span>: <span class="hljs-string">"bXVsdGlwbGU="</span>,
+    <span class="hljs-string">"difficulty"</span>: <span class="hljs-string">"bWVkaXVt"</span>,
+    <span class="hljs-string">"category"</span>: <span class="hljs-string">"U2NpZW5jZSAmIE5hdHVyZQ=="</span>,
+    <span class="hljs-string">"question"</span>: <span class="hljs-string">"V2hhdCBpcyBIeXBlcm5hdHJlbWlhPw=="</span>,
+    <span class="hljs-string">"correct_answer"</span>: <span class="hljs-string">"SW5jcmVhc2UgaW4gYmxvb2Qgc29kaXVt"</span>,
+    <span class="hljs-string">"incorrect_answers"</span>: [
+      <span class="hljs-string">"RGVjcmVhc2UgaW4gYmxvb2QgcG90YXNzaXVt"</span>,
+      <span class="hljs-string">"SW5jcmVhc2UgaW4gYmxvb2QgZ2x1Y29zZQ=="</span>,
+      <span class="hljs-string">"RGVjcmVhc2UgaW4gYmxvb2QgaXJvbg=="</span>
+    ],
+    <span class="hljs-string">"options"</span>: [
+      <span class="hljs-string">"RGVjcmVhc2UgaW4gYmxvb2QgcG90YXNzaXVt"</span>,
+      <span class="hljs-string">"SW5jcmVhc2UgaW4gYmxvb2QgZ2x1Y29zZQ=="</span>,
+      <span class="hljs-string">"RGVjcmVhc2UgaW4gYmxvb2QgaXJvbg=="</span>,
+      <span class="hljs-string">"SW5jcmVhc2UgaW4gYmxvb2Qgc29kaXVt"</span>
+    ]
+  },
+  {
+    <span class="hljs-string">"type"</span>: <span class="hljs-string">"bXVsdGlwbGU="</span>,
+    <span class="hljs-string">"difficulty"</span>: <span class="hljs-string">"bWVkaXVt"</span>,
+    <span class="hljs-string">"category"</span>: <span class="hljs-string">"U2NpZW5jZSAmIE5hdHVyZQ=="</span>,
+    <span class="hljs-string">"question"</span>: <span class="hljs-string">"QWJvdXQgaG93IG9sZCBpcyBFYXJ0aD8="</span>,
+    <span class="hljs-string">"correct_answer"</span>: <span class="hljs-string">"NC41IEJpbGxpb24gWWVhcnM="</span>,
+    <span class="hljs-string">"incorrect_answers"</span>: [
+      <span class="hljs-string">"My41IEJpbGxpb24gWWVhcnM="</span>,
+      <span class="hljs-string">"Mi41IEJpbGxpb24gWWVhcnM="</span>,
+      <span class="hljs-string">"NS41IEJpbGxpb24gWWVhcnM="</span>
+    ],
+    <span class="hljs-string">"options"</span>: [
+      <span class="hljs-string">"My41IEJpbGxpb24gWWVhcnM="</span>,
+      <span class="hljs-string">"Mi41IEJpbGxpb24gWWVhcnM="</span>,
+      <span class="hljs-string">"NS41IEJpbGxpb24gWWVhcnM="</span>,
+      <span class="hljs-string">"NC41IEJpbGxpb24gWWVhcnM="</span>
+    ]
+  },
+  {
+    <span class="hljs-string">"type"</span>: <span class="hljs-string">"bXVsdGlwbGU="</span>,
+    <span class="hljs-string">"difficulty"</span>: <span class="hljs-string">"bWVkaXVt"</span>,
+    <span class="hljs-string">"category"</span>: <span class="hljs-string">"U2NpZW5jZSAmIE5hdHVyZQ=="</span>,
+    <span class="hljs-string">"question"</span>: <span class="hljs-string">"VGhlIGh1bWVydXMsIHBhaXJlZCByYWRpdXMsIGFuZCB1bG5hIGNvbWUgdG9nZXRoZXIgdG8gZm9ybSB3aGF0IGpvaW50Pw=="</span>,
+    <span class="hljs-string">"correct_answer"</span>: <span class="hljs-string">"RWxib3c="</span>,
+    <span class="hljs-string">"incorrect_answers"</span>: [
+      <span class="hljs-string">"S25lZQ=="</span>,
+      <span class="hljs-string">"U2hvbGRlcg=="</span>,
+      <span class="hljs-string">"QW5rbGU="</span>
+    ],
+    <span class="hljs-string">"options"</span>: [
+      <span class="hljs-string">"S25lZQ=="</span>,
+      <span class="hljs-string">"U2hvbGRlcg=="</span>,
+      <span class="hljs-string">"QW5rbGU="</span>,
+      <span class="hljs-string">"RWxib3c="</span>
+    ]
+  },
+  {
+    <span class="hljs-string">"type"</span>: <span class="hljs-string">"bXVsdGlwbGU="</span>,
+    <span class="hljs-string">"difficulty"</span>: <span class="hljs-string">"bWVkaXVt"</span>,
+    <span class="hljs-string">"category"</span>: <span class="hljs-string">"U2NpZW5jZSAmIE5hdHVyZQ=="</span>,
+    <span class="hljs-string">"question"</span>: <span class="hljs-string">"QXUgb24gdGhlIFBlcmlvZGljIFRhYmxlIHJlZmVycyB0byB3aGljaCBlbGVtZW50Pw=="</span>,
+    <span class="hljs-string">"correct_answer"</span>: <span class="hljs-string">"R29sZA=="</span>,
+    <span class="hljs-string">"incorrect_answers"</span>: [
+      <span class="hljs-string">"U2lsdmVy"</span>,
+      <span class="hljs-string">"T3h5Z2Vu"</span>,
+      <span class="hljs-string">"Tmlja2Vs"</span>
+    ],
+    <span class="hljs-string">"options"</span>: [
+      <span class="hljs-string">"U2lsdmVy"</span>,
+      <span class="hljs-string">"T3h5Z2Vu"</span>,
+      <span class="hljs-string">"Tmlja2Vs"</span>,
+      <span class="hljs-string">"R29sZA=="</span>
+    ]
+  },
+  {
+    <span class="hljs-string">"type"</span>: <span class="hljs-string">"Ym9vbGVhbg=="</span>,
+    <span class="hljs-string">"difficulty"</span>: <span class="hljs-string">"bWVkaXVt"</span>,
+    <span class="hljs-string">"category"</span>: <span class="hljs-string">"U2NpZW5jZSAmIE5hdHVyZQ=="</span>,
+    <span class="hljs-string">"question"</span>: <span class="hljs-string">"VGhlIHBsYW5ldCBNYXJzIGhhcyB0d28gbW9vbnMgb3JiaXRpbmcgaXQu"</span>,
+    <span class="hljs-string">"correct_answer"</span>: <span class="hljs-string">"VHJ1ZQ=="</span>,
+    <span class="hljs-string">"incorrect_answers"</span>: [
+      <span class="hljs-string">"RmFsc2U="</span>
+    ],
+    <span class="hljs-string">"options"</span>: [
+      <span class="hljs-string">"RmFsc2U="</span>,
+      <span class="hljs-string">"VHJ1ZQ=="</span>
+    ]
+  }
+]
+</div></code></pre>
+<h2 id="file-quizjsx">file Quiz.jsx</h2>
+<pre class="hljs"><code><div>
+<span class="hljs-keyword">import</span> { useContext } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { QuizContext } <span class="hljs-keyword">from</span> <span class="hljs-string">'./components/QuizContext'</span>;
+<span class="hljs-comment">// import quiz from './output.json'</span>
+<span class="hljs-keyword">import</span> Questions <span class="hljs-keyword">from</span> <span class="hljs-string">'./components/Questions'</span>
+
+<span class="hljs-keyword">import</span> <span class="hljs-string">"./css/App.css"</span>
+
+
+<span class="hljs-keyword">const</span> Quiz = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+  <span class="hljs-keyword">const</span> { quiz } = useContext(QuizContext);
+  <span class="hljs-comment">// console.log('quiz', quiz)</span>
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Questions</span> <span class="hljs-attr">mcqData</span>=<span class="hljs-string">{</span> <span class="hljs-attr">quiz</span> } /&gt;</span>
+    <span class="hljs-tag">&lt;/&gt;</span></span>
+  );
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Quiz;
+
+</div></code></pre>
+<h2 id="file-testjs">file test.js</h2>
+<pre class="hljs"><code><div>
+<span class="hljs-keyword">import</span> axios <span class="hljs-keyword">from</span> <span class="hljs-string">"axios"</span>;
+
+<span class="hljs-built_in">console</span>.log((<span class="hljs-keyword">await</span> axios.get(<span class="hljs-string">'https://opentdb.com/api.php?amount=10'</span>)).data);
+</div></code></pre>
+<h2 id="file-testjson">file test.json</h2>
+<pre class="hljs"><code><div>
+
+</div></code></pre>
+<h2 id="file-testjsx">file test.jsx</h2>
+<pre class="hljs"><code><div>
+
+</div></code></pre>
+<h2 id="file-reactsvg">file react.svg</h2>
+<pre class="hljs"><code><div>
+&lt;svg xmlns=<span class="hljs-string">"http://www.w3.org/2000/svg"</span> xmlns:xlink=<span class="hljs-string">"http://www.w3.org/1999/xlink"</span> aria-hidden=<span class="hljs-string">"true"</span> role=<span class="hljs-string">"img"</span> <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"iconify iconify--logos"</span> width=<span class="hljs-string">"35.93"</span> height=<span class="hljs-string">"32"</span> preserveAspectRatio=<span class="hljs-string">"xMidYMid meet"</span> viewBox=<span class="hljs-string">"0 0 256 228"</span>&gt;<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">path</span> <span class="hljs-attr">fill</span>=<span class="hljs-string">"#00D8FF"</span> <span class="hljs-attr">d</span>=<span class="hljs-string">"M210.483 73.824a171.49 171.49 0 0 0-8.24-2.597c.465-1.9.893-3.777 1.273-5.621c6.238-30.281 2.16-54.676-11.769-62.708c-13.355-7.7-35.196.329-57.254 19.526a171.23 171.23 0 0 0-6.375 5.848a155.866 155.866 0 0 0-4.241-3.917C100.759 3.829 77.587-4.822 63.673 3.233C50.33 10.957 46.379 33.89 51.995 62.588a170.974 170.974 0 0 0 1.892 8.48c-3.28.932-6.445 1.924-9.474 2.98C17.309 83.498 0 98.307 0 113.668c0 15.865 18.582 31.778 46.812 41.427a145.52 145.52 0 0 0 6.921 2.165a167.467 167.467 0 0 0-2.01 9.138c-5.354 28.2-1.173 50.591 12.134 58.266c13.744 7.926 36.812-.22 59.273-19.855a145.567 145.567 0 0 0 5.342-4.923a168.064 168.064 0 0 0 6.92 6.314c21.758 18.722 43.246 26.282 56.54 18.586c13.731-7.949 18.194-32.003 12.4-61.268a145.016 145.016 0 0 0-1.535-6.842c1.62-.48 3.21-.974 4.76-1.488c29.348-9.723 48.443-25.443 48.443-41.52c0-15.417-17.868-30.326-45.517-39.844Zm-6.365 70.984c-1.4.463-2.836.91-4.3 1.345c-3.24-10.257-7.612-21.163-12.963-32.432c5.106-11 9.31-21.767 12.459-31.957c2.619.758 5.16 1.557 7.61 2.4c23.69 8.156 38.14 20.213 38.14 29.504c0 9.896-15.606 22.743-40.946 31.14Zm-10.514 20.834c2.562 12.94 2.927 24.64 1.23 33.787c-1.524 8.219-4.59 13.698-8.382 15.893c-8.067 4.67-25.32-1.4-43.927-17.412a156.726 156.726 0 0 1-6.437-5.87c7.214-7.889 14.423-17.06 21.459-27.246c12.376-1.098 24.068-2.894 34.671-5.345a134.17 134.17 0 0 1 1.386 6.193ZM87.276 214.515c-7.882 2.783-14.16 2.863-17.955.675c-8.075-4.657-11.432-22.636-6.853-46.752a156.923 156.923 0 0 1 1.869-8.499c10.486 2.32 22.093 3.988 34.498 4.994c7.084 9.967 14.501 19.128 21.976 27.15a134.668 134.668 0 0 1-4.877 4.492c-9.933 8.682-19.886 14.842-28.658 17.94ZM50.35 144.747c-12.483-4.267-22.792-9.812-29.858-15.863c-6.35-5.437-9.555-10.836-9.555-15.216c0-9.322 13.897-21.212 37.076-29.293c2.813-.98 5.757-1.905 8.812-2.773c3.204 10.42 7.406 21.315 12.477 32.332c-5.137 11.18-9.399 22.249-12.634 32.792a134.718 134.718 0 0 1-6.318-1.979Zm12.378-84.26c-4.811-24.587-1.616-43.134 6.425-47.789c8.564-4.958 27.502 2.111 47.463 19.835a144.318 144.318 0 0 1 3.841 3.545c-7.438 7.987-14.787 17.08-21.808 26.988c-12.04 1.116-23.565 2.908-34.161 5.309a160.342 160.342 0 0 1-1.76-7.887Zm110.427 27.268a347.8 347.8 0 0 0-7.785-12.803c8.168 1.033 15.994 2.404 23.343 4.08c-2.206 7.072-4.956 14.465-8.193 22.045a381.151 381.151 0 0 0-7.365-13.322Zm-45.032-43.861c5.044 5.465 10.096 11.566 15.065 18.186a322.04 322.04 0 0 0-30.257-.006c4.974-6.559 10.069-12.652 15.192-18.18ZM82.802 87.83a323.167 323.167 0 0 0-7.227 13.238c-3.184-7.553-5.909-14.98-8.134-22.152c7.304-1.634 15.093-2.97 23.209-3.984a321.524 321.524 0 0 0-7.848 12.897Zm8.081 65.352c-8.385-.936-16.291-2.203-23.593-3.793c2.26-7.3 5.045-14.885 8.298-22.6a321.187 321.187 0 0 0 7.257 13.246c2.594 4.48 5.28 8.868 8.038 13.147Zm37.542 31.03c-5.184-5.592-10.354-11.779-15.403-18.433c4.902.192 9.899.29 14.978.29c5.218 0 10.376-.117 15.453-.343c-4.985 6.774-10.018 12.97-15.028 18.486Zm52.198-57.817c3.422 7.8 6.306 15.345 8.596 22.52c-7.422 1.694-15.436 3.058-23.88 4.071a382.417 382.417 0 0 0 7.859-13.026a347.403 347.403 0 0 0 7.425-13.565Zm-16.898 8.101a358.557 358.557 0 0 1-12.281 19.815a329.4 329.4 0 0 1-23.444.823c-7.967 0-15.716-.248-23.178-.732a310.202 310.202 0 0 1-12.513-19.846h.001a307.41 307.41 0 0 1-10.923-20.627a310.278 310.278 0 0 1 10.89-20.637l-.001.001a307.318 307.318 0 0 1 12.413-19.761c7.613-.576 15.42-.876 23.31-.876H128c7.926 0 15.743.303 23.354.883a329.357 329.357 0 0 1 12.335 19.695a358.489 358.489 0 0 1 11.036 20.54a329.472 329.472 0 0 1-11 20.722Zm22.56-122.124c8.572 4.944 11.906 24.881 6.52 51.026c-.344 1.668-.73 3.367-1.15 5.09c-10.622-2.452-22.155-4.275-34.23-5.408c-7.034-10.017-14.323-19.124-21.64-27.008a160.789 160.789 0 0 1 5.888-5.4c18.9-16.447 36.564-22.941 44.612-18.3ZM128 90.808c12.625 0 22.86 10.235 22.86 22.86s-10.235 22.86-22.86 22.86s-22.86-10.235-22.86-22.86s10.235-22.86 22.86-22.86Z"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">path</span>&gt;</span></span>&lt;<span class="hljs-regexp">/svg&gt;
+</span></div></code></pre>
+<h2 id="file-groupresultjsx">file GroupResult.jsx</h2>
+<pre class="hljs"><code><div>
+<span class="hljs-keyword">import</span> Question <span class="hljs-keyword">from</span> <span class="hljs-string">'./Question'</span>;
+
+<span class="hljs-keyword">import</span> <span class="hljs-string">"../css/App.css"</span>
+
+<span class="hljs-keyword">const</span> GroupResult = <span class="hljs-function">(<span class="hljs-params">{ mcqData, selectedOption, setSelectedOption, showResults }</span>) =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'mcqData'</span>, mcqData)
+    <span class="hljs-keyword">const</span> correctAnswerArray = []
+    <span class="hljs-keyword">const</span> wronfAnswerArray = []
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; selectedOption.length; ++i) {
+        <span class="hljs-keyword">if</span> (selectedOption[i] !== mcqData[i].correct_answer) {
+            wronfAnswerArray.push([i, mcqData[i]])
+        } <span class="hljs-keyword">else</span> {
+            correctAnswerArray.push([i, mcqData[i]])
+        }
+    }
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'newArray'</span>, correctAnswerArray);
+    <span class="hljs-keyword">return</span> (
+        <span class="xml"><span class="hljs-tag">&lt;&gt;</span>
+            {
+                wronfAnswerArray.map((question) =&gt; (
+                    <span class="hljs-tag">&lt;<span class="hljs-name">Question</span>
+                        <span class="hljs-attr">key</span>=<span class="hljs-string">{</span> <span class="hljs-attr">question</span>[<span class="hljs-attr">0</span>] }
+                        <span class="hljs-attr">question</span>=<span class="hljs-string">{</span> <span class="hljs-attr">question</span>[<span class="hljs-attr">1</span>] }
+                        <span class="hljs-attr">index</span>=<span class="hljs-string">{</span> <span class="hljs-attr">question</span>[<span class="hljs-attr">0</span>] }
+                        <span class="hljs-attr">selectedOption</span>=<span class="hljs-string">{</span> <span class="hljs-attr">selectedOption</span> }
+                        <span class="hljs-attr">setSelectedOption</span>=<span class="hljs-string">{</span> <span class="hljs-attr">setSelectedOption</span> }
+                        <span class="hljs-attr">showResults</span>=<span class="hljs-string">{</span> <span class="hljs-attr">showResults</span> }
+                    /&gt;</span>
+                ))
+            }
+
+            {
+                correctAnswerArray.map((question) =&gt; (
+                    <span class="hljs-tag">&lt;<span class="hljs-name">Question</span>
+                        <span class="hljs-attr">key</span>=<span class="hljs-string">{</span> <span class="hljs-attr">question</span>[<span class="hljs-attr">0</span>] }
+                        <span class="hljs-attr">question</span>=<span class="hljs-string">{</span> <span class="hljs-attr">question</span>[<span class="hljs-attr">1</span>] }
+                        <span class="hljs-attr">index</span>=<span class="hljs-string">{</span> <span class="hljs-attr">question</span>[<span class="hljs-attr">0</span>] }
+                        <span class="hljs-attr">selectedOption</span>=<span class="hljs-string">{</span> <span class="hljs-attr">selectedOption</span> }
+                        <span class="hljs-attr">setSelectedOption</span>=<span class="hljs-string">{</span> <span class="hljs-attr">setSelectedOption</span> }
+                        <span class="hljs-attr">showResults</span>=<span class="hljs-string">{</span> <span class="hljs-attr">showResults</span> }
+                    /&gt;</span>
+                ))
+            }
+
+        <span class="hljs-tag">&lt;/&gt;</span></span>
+    )
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> GroupResult;
+</div></code></pre>
+<h2 id="file-headerjsx">file Header.jsx</h2>
+<pre class="hljs"><code><div>
+<span class="hljs-keyword">import</span> { Navbar, Container } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap'</span>;
+
+<span class="hljs-keyword">import</span> ThemeSelector <span class="hljs-keyword">from</span> <span class="hljs-string">'./ThemeSelector'</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Header</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">return</span> (
+        <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Container</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'mb-3'</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">Navbar</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">Navbar.Brand</span>&gt;</span>Quiz App<span class="hljs-tag">&lt;/<span class="hljs-name">Navbar.Brand</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">ThemeSelector</span> /&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">Navbar</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">Container</span>&gt;</span></span>
+    );
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Header;
+</div></code></pre>
+<h2 id="file-loadingbuttonjsx">file LoadingButton.jsx</h2>
+<pre class="hljs"><code><div>
+<span class="hljs-keyword">import</span> { useState, useEffect, useContext } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { Button, Modal } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap'</span>;
+<span class="hljs-keyword">import</span> axios <span class="hljs-keyword">from</span> <span class="hljs-string">'axios'</span>
+
+<span class="hljs-comment">// import LoadingButton from './LoadingButton';</span>
+<span class="hljs-keyword">import</span> { QuizContext } <span class="hljs-keyword">from</span> <span class="hljs-string">'./QuizContext'</span>;
+
+<span class="hljs-keyword">import</span> { v4 <span class="hljs-keyword">as</span> uuidv4 } <span class="hljs-keyword">from</span> <span class="hljs-string">'uuid'</span>;
+
+<span class="hljs-keyword">import</span> <span class="hljs-string">"../css/App.css"</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">shuffle</span>(<span class="hljs-params">array</span>) </span>{
+    <span class="hljs-comment">// console.log('array', array)</span>
+    <span class="hljs-keyword">let</span> currentIndex = array.length, randomIndex;
+
+    <span class="hljs-comment">// While there remain elements to shuffle.</span>
+    <span class="hljs-keyword">while</span> (currentIndex &gt; <span class="hljs-number">0</span>) {
+
+        <span class="hljs-comment">// Pick a remaining element.</span>
+        randomIndex = <span class="hljs-built_in">Math</span>.floor(<span class="hljs-built_in">Math</span>.random() * currentIndex);
+        currentIndex--;
+
+        <span class="hljs-comment">// And swap it with the current element.</span>
+        [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex], array[currentIndex]];
+    }
+    <span class="hljs-comment">// console.log('array', array)</span>
+
+    <span class="hljs-keyword">return</span> array;
+}
+
+
+<span class="hljs-keyword">const</span> mixAndShuffle = <span class="hljs-function">(<span class="hljs-params">questions</span>) =&gt;</span> {
+    questions = questions.map(<span class="hljs-function"><span class="hljs-params">question</span> =&gt;</span> {
+        <span class="hljs-keyword">const</span> combinedOptions = question.incorrect_answers.concat([question.correct_answer]);
+        <span class="hljs-comment">// console.log('temp', combinedOptions, typeof(combinedOptions), combinedOptions.length)</span>
+        <span class="hljs-keyword">const</span> shuffledOptions = shuffle(combinedOptions);
+        <span class="hljs-keyword">return</span> { ...question, <span class="hljs-attr">options</span>: shuffledOptions };
+    })
+
+    <span class="hljs-keyword">return</span> questions;
+};
+
+<span class="hljs-comment">// const questions = mixAndShuffle(quiz.results);</span>
+
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">LoadingButton</span>(<span class="hljs-params">{ num, selectedString, difficulty, type, navigate }</span>) </span>{
+    <span class="hljs-keyword">const</span> { setQuiz } = useContext(QuizContext);
+    <span class="hljs-keyword">const</span> [isLoading, setLoading] = useState(<span class="hljs-literal">false</span>);
+    <span class="hljs-keyword">const</span> [show, setShow] = useState(<span class="hljs-literal">false</span>);
+    <span class="hljs-keyword">const</span> [modal, setModal] = useState({});
+
+    <span class="hljs-keyword">const</span> handleClose = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> setShow(<span class="hljs-literal">false</span>);
+
+    useEffect(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+        <span class="hljs-keyword">const</span> numNum = <span class="hljs-built_in">Number</span>(num);
+        <span class="hljs-keyword">if</span> (num &amp;&amp; numNum &lt; <span class="hljs-number">1</span> || numNum &gt; <span class="hljs-number">50</span>) {
+            setModal({ <span class="hljs-attr">title</span>: <span class="hljs-string">'Validation Error'</span>, <span class="hljs-attr">message</span>: <span class="hljs-string">'Number of questions must be between 1 and 50.'</span> });
+            setShow(<span class="hljs-literal">true</span>);
+            setLoading(<span class="hljs-literal">false</span>);
+            <span class="hljs-keyword">return</span>;
+        }
+        <span class="hljs-comment">// console.log('"VALID"', numNum);</span>
+        <span class="hljs-comment">// setLoading(false);</span>
+        <span class="hljs-comment">// return;</span>
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'"called"'</span>, <span class="hljs-string">"called"</span>)
+        <span class="hljs-keyword">const</span> url = <span class="hljs-string">"https://opentdb.com/api.php"</span>;
+        <span class="hljs-keyword">const</span> a = num ? num : <span class="hljs-number">10</span>;
+        <span class="hljs-keyword">const</span> b = selectedString ? <span class="hljs-string">"&amp;category="</span> + selectedString : <span class="hljs-string">""</span>;
+        <span class="hljs-keyword">const</span> c = difficulty ? <span class="hljs-string">"&amp;difficulty="</span> + difficulty : <span class="hljs-string">""</span>;
+        <span class="hljs-keyword">const</span> d = type ? <span class="hljs-string">"&amp;type="</span> + type : <span class="hljs-string">""</span>;
+        <span class="hljs-keyword">const</span> query = url + <span class="hljs-string">"?amount="</span> + a + b + c + d + <span class="hljs-string">"&amp;encode=base64"</span>;
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'query'</span>, query)
+
+        <span class="hljs-comment">// if (isLoading) {</span>
+        <span class="hljs-comment">//     setQuiz(mixAndShuffle(quiz));</span>
+        <span class="hljs-comment">//     setLoading(false)</span>
+        <span class="hljs-comment">//     const quizId = uuidv4();</span>
+        <span class="hljs-comment">//     navigate(`/quiz/${quizId}`);</span>
+        <span class="hljs-comment">// }</span>
+        <span class="hljs-comment">// return;</span>
+
+        <span class="hljs-keyword">if</span> (isLoading) {
+            axios.get(query)
+                .then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> {
+                    <span class="hljs-keyword">const</span> quiz = mixAndShuffle(response.data.results);
+                    setQuiz(quiz);
+                    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'response.data'</span>, quiz)
+                    setLoading(<span class="hljs-literal">false</span>);
+
+                    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sleepFor</span>(<span class="hljs-params">sleepDuration</span>) </span>{
+                        <span class="hljs-keyword">var</span> now = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().getTime();
+                        <span class="hljs-keyword">while</span> (<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().getTime() &lt; now + sleepDuration) { <span class="hljs-comment">/* Do nothing */</span> }
+                    }
+
+                    sleepFor(<span class="hljs-number">3</span>);
+
+                    <span class="hljs-keyword">const</span> quizId = uuidv4();
+                    navigate(<span class="hljs-string">`/quiz/<span class="hljs-subst">${quizId}</span>`</span>);
+                }).catch(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> {
+                    <span class="hljs-built_in">console</span>.error(<span class="hljs-string">'Error fetching quiz data:'</span>, error);
+                    setModal({ <span class="hljs-attr">title</span>: <span class="hljs-string">'API Error'</span>, <span class="hljs-attr">message</span>: error.message });
+                    setShow(<span class="hljs-literal">true</span>);
+                    setLoading(<span class="hljs-literal">false</span>);
+                });
+        }
+
+    }, [isLoading]);
+
+    <span class="hljs-keyword">const</span> handleClick = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> setLoading(<span class="hljs-literal">true</span>);
+
+    <span class="hljs-keyword">return</span> (
+        <span class="xml"><span class="hljs-tag">&lt;&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
+                <span class="hljs-attr">variant</span>=<span class="hljs-string">"primary"</span>
+                <span class="hljs-attr">disabled</span>=<span class="hljs-string">{</span> <span class="hljs-attr">isLoading</span> }
+                <span class="hljs-attr">onClick</span>=<span class="hljs-string">{</span> !<span class="hljs-attr">isLoading</span> ? <span class="hljs-attr">handleClick</span> <span class="hljs-attr">:</span> <span class="hljs-attr">null</span> }
+            &gt;</span>
+                { isLoading ? 'Loading…' : 'Submit' }
+            <span class="hljs-tag">&lt;/<span class="hljs-name">Button</span>&gt;</span>
+
+            <span class="hljs-tag">&lt;<span class="hljs-name">Modal</span> <span class="hljs-attr">show</span>=<span class="hljs-string">{</span> <span class="hljs-attr">show</span> } <span class="hljs-attr">onHide</span>=<span class="hljs-string">{</span> <span class="hljs-attr">handleClose</span> }&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">Modal.Header</span> <span class="hljs-attr">closeButton</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">Modal.Title</span>&gt;</span> { modal.title } <span class="hljs-tag">&lt;/<span class="hljs-name">Modal.Title</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">Modal.Header</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">Modal.Body</span>&gt;</span>{ modal.message }<span class="hljs-tag">&lt;/<span class="hljs-name">Modal.Body</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">Modal.Footer</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">Button</span> <span class="hljs-attr">variant</span>=<span class="hljs-string">"secondary"</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{</span> <span class="hljs-attr">handleClose</span> }&gt;</span>
+                        Close
+                    <span class="hljs-tag">&lt;/<span class="hljs-name">Button</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">Modal.Footer</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">Modal</span>&gt;</span>
+        <span class="hljs-tag">&lt;/&gt;</span></span>
+    );
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> LoadingButton
+</div></code></pre>
+<h2 id="file-questionjsx">file Question.jsx</h2>
+<pre class="hljs"><code><div>
+<span class="hljs-keyword">import</span> { Card, ListGroup } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap'</span>;
+
+<span class="hljs-keyword">import</span> { Buffer } <span class="hljs-keyword">from</span> <span class="hljs-string">'buffer'</span>;
+
+<span class="hljs-keyword">import</span> <span class="hljs-string">"../css/App.css"</span>
+
+<span class="hljs-keyword">const</span> Question = <span class="hljs-function">(<span class="hljs-params">{ question, index, selectedOption, setSelectedOption, showResults }</span>) =&gt;</span> {
+    <span class="hljs-keyword">const</span> handleSelect = <span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> {
+        <span class="hljs-keyword">const</span> newSelectedOption = [...selectedOption];
+        newSelectedOption[index] = item;
+        setSelectedOption(newSelectedOption);
+    };
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'question'</span>, question)
+
+    <span class="hljs-keyword">return</span> (
+
+        <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Card</span> <span class="hljs-attr">key</span>=<span class="hljs-string">{</span> <span class="hljs-attr">index</span> } <span class="hljs-attr">style</span>=<span class="hljs-string">{</span> { <span class="hljs-attr">width:</span> '<span class="hljs-attr">90</span>%', <span class="hljs-attr">borderRadius:</span> '<span class="hljs-attr">15px</span>', <span class="hljs-attr">margin:</span> '<span class="hljs-attr">1rem</span>', <span class="hljs-attr">boxShadow:</span> <span class="hljs-attr">showResults</span> &amp;&amp; <span class="hljs-attr">selectedOption</span>[<span class="hljs-attr">index</span>] !== <span class="hljs-string">question.correct_answer</span> ? '<span class="hljs-attr">0</span> <span class="hljs-attr">0</span> <span class="hljs-attr">10px</span> <span class="hljs-attr">red</span>' <span class="hljs-attr">:</span> '' } }&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">Card.Header</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{</span> { <span class="hljs-attr">borderRadius:</span> '<span class="hljs-attr">15px</span> <span class="hljs-attr">15px</span> <span class="hljs-attr">0</span> <span class="hljs-attr">0</span>' } }&gt;</span>Category: { Buffer.from(question.category, 'base64').toString('utf-8') }<span class="hljs-tag">&lt;/<span class="hljs-name">Card.Header</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">Card.Body</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">Card.Title</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{</span> { <span class="hljs-attr">margin:</span> '<span class="hljs-attr">10px</span> <span class="hljs-attr">0px</span> <span class="hljs-attr">20px</span> <span class="hljs-attr">15px</span>' } }&gt;</span>{ "Question " + (index + 1) + ": " + Buffer.from(question.question, 'base64').toString('utf-8') }<span class="hljs-tag">&lt;/<span class="hljs-name">Card.Title</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">ListGroup</span>&gt;</span>
+                    { question.options.map((item, itemIndex) =&gt; {
+                        const isSelected = selectedOption[index] === item;
+                        let allowChange = true;
+                        let variant = '';
+                        if (showResults) {
+                            allowChange = false;
+                            if (item === question.correct_answer) {
+                                variant = 'success';
+                            } else if (isSelected &amp;&amp; item !== question.correct_answer) {
+                                variant = 'danger';
+                            }
+                        } else {
+                            variant = isSelected ? "primary" : "";
+                        }
+                        return (
+                            <span class="hljs-tag">&lt;<span class="hljs-name">ListGroup.Item</span>
+                                <span class="hljs-attr">key</span>=<span class="hljs-string">{</span> <span class="hljs-attr">itemIndex</span> }
+                                <span class="hljs-attr">variant</span>=<span class="hljs-string">{</span> <span class="hljs-attr">variant</span> }
+                                <span class="hljs-attr">style</span>=<span class="hljs-string">{</span> { <span class="hljs-attr">borderRadius:</span> '<span class="hljs-attr">15px</span>', <span class="hljs-attr">cursor:</span> '<span class="hljs-attr">pointer</span>' } }
+                                <span class="hljs-attr">onClick</span>=<span class="hljs-string">{</span> <span class="hljs-attr">allowChange</span> ? () =&gt;</span> handleSelect(item) : () =&gt; { } }
+                            &gt;
+                                { Buffer.from(item, 'base64').toString('utf-8') }
+                            <span class="hljs-tag">&lt;/<span class="hljs-name">ListGroup.Item</span>&gt;</span>
+                        )
+                    }) }
+                <span class="hljs-tag">&lt;/<span class="hljs-name">ListGroup</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">Card.Body</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">Card</span>&gt;</span></span>
+    );
+};
+
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Question;
+</div></code></pre>
+<h2 id="file-questionsjsx">file Questions.jsx</h2>
+<pre class="hljs"><code><div>
+<span class="hljs-keyword">import</span> React, { useState } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { Container, Button } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap'</span>;
+
+<span class="hljs-keyword">import</span> <span class="hljs-string">"../css/App.css"</span>
+<span class="hljs-keyword">import</span> Toggle <span class="hljs-keyword">from</span> <span class="hljs-string">'./Toggle'</span>;
+
+
+<span class="hljs-keyword">import</span> GroupResult <span class="hljs-keyword">from</span> <span class="hljs-string">'./GroupResult'</span>;
+<span class="hljs-keyword">import</span> ShowQuestions <span class="hljs-keyword">from</span> <span class="hljs-string">'./ShowQuestions'</span>;
+
+
+<span class="hljs-keyword">const</span> Questions = React.memo(<span class="hljs-function">(<span class="hljs-params">{ mcqData }</span>) =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'mcqData'</span>, mcqData)
+    <span class="hljs-keyword">const</span> [groupToggle, setGroupToggle] = useState(<span class="hljs-literal">true</span>);
+    <span class="hljs-keyword">const</span> [selectedOption, setSelectedOption] = useState(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(mcqData.length));
+    <span class="hljs-keyword">const</span> [showResults, setShowResults] = useState(<span class="hljs-literal">false</span>);
+    <span class="hljs-keyword">const</span> [score, setScore] = useState(<span class="hljs-number">0</span>);
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'selectedOption'</span>, selectedOption)
+
+    <span class="hljs-keyword">const</span> handleSubmit = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+        <span class="hljs-keyword">let</span> newScore = <span class="hljs-number">0</span>;
+        selectedOption.forEach(<span class="hljs-function">(<span class="hljs-params">option, index</span>) =&gt;</span> {
+            <span class="hljs-keyword">if</span> (option === mcqData[index].correct_answer) {
+                newScore += <span class="hljs-number">1</span>;
+            }
+        });
+        setScore(newScore);
+        setShowResults(<span class="hljs-literal">true</span>);
+    };
+
+    <span class="hljs-keyword">return</span> (
+        <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{</span> { <span class="hljs-attr">display:</span> '<span class="hljs-attr">flex</span>', <span class="hljs-attr">justifyContent:</span> '<span class="hljs-attr">space-between</span>' } }&gt;</span>
+
+            <span class="hljs-tag">&lt;<span class="hljs-name">Container</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{</span> { <span class="hljs-attr">maxWidth:</span> '<span class="hljs-attr">80</span>%', <span class="hljs-attr">display:</span> '<span class="hljs-attr">flex</span>', <span class="hljs-attr">flexDirection:</span> '<span class="hljs-attr">column</span>', <span class="hljs-attr">alignItems:</span> '<span class="hljs-attr">center</span>' } }&gt;</span>
+
+                { showResults &amp;&amp; (
+                    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{</span> { <span class="hljs-attr">maxWidth:</span> "<span class="hljs-attr">100</span>%", <span class="hljs-attr">margin:</span> "<span class="hljs-attr">20px</span>", <span class="hljs-attr">padding:</span> '<span class="hljs-attr">20px</span>', <span class="hljs-attr">border:</span> '<span class="hljs-attr">1px</span> <span class="hljs-attr">solid</span> <span class="hljs-attr">black</span>', <span class="hljs-attr">textAlign:</span> '<span class="hljs-attr">center</span>' } }&gt;</span>
+                        Your score: { score }/{ mcqData.length }
+                    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                ) }
+
+                { showResults &amp;&amp; (
+                    <span class="hljs-tag">&lt;<span class="hljs-name">Toggle</span> <span class="hljs-attr">group</span>=<span class="hljs-string">{</span> <span class="hljs-attr">groupToggle</span> } <span class="hljs-attr">setGroup</span>=<span class="hljs-string">{</span> <span class="hljs-attr">setGroupToggle</span> } /&gt;</span>
+                ) }
+
+                { showResults &amp;&amp; groupToggle &amp;&amp; (
+                    <span class="hljs-tag">&lt;<span class="hljs-name">GroupResult</span> <span class="hljs-attr">mcqData</span>=<span class="hljs-string">{</span> <span class="hljs-attr">mcqData</span> } <span class="hljs-attr">selectedOption</span>=<span class="hljs-string">{</span> <span class="hljs-attr">selectedOption</span> } <span class="hljs-attr">setSelectedOption</span>=<span class="hljs-string">{</span> <span class="hljs-attr">setSelectedOption</span> } <span class="hljs-attr">showResults</span>=<span class="hljs-string">{</span> <span class="hljs-attr">showResults</span> } /&gt;</span>
+                ) }
+                { (!showResults || !groupToggle) &amp;&amp; (
+                    <span class="hljs-tag">&lt;<span class="hljs-name">ShowQuestions</span> <span class="hljs-attr">mcqData</span>=<span class="hljs-string">{</span> <span class="hljs-attr">mcqData</span> } <span class="hljs-attr">selectedOption</span>=<span class="hljs-string">{</span> <span class="hljs-attr">selectedOption</span> } <span class="hljs-attr">setSelectedOption</span>=<span class="hljs-string">{</span> <span class="hljs-attr">setSelectedOption</span> } <span class="hljs-attr">showResults</span>=<span class="hljs-string">{</span> <span class="hljs-attr">showResults</span> } /&gt;</span>
+                ) }
+
+
+
+                { !showResults &amp;&amp; (<span class="hljs-tag">&lt;<span class="hljs-name">Button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{</span> <span class="hljs-attr">handleSubmit</span> }&gt;</span>Submit<span class="hljs-tag">&lt;/<span class="hljs-name">Button</span>&gt;</span>) }
+            <span class="hljs-tag">&lt;/<span class="hljs-name">Container</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+    );
+});
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Questions;
+</div></code></pre>
+<h2 id="file-quizcontextjsx">file QuizContext.jsx</h2>
+<pre class="hljs"><code><div>
+<span class="hljs-keyword">import</span> { createContext, useState } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> QuizContext = createContext();
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> QuizProvider = <span class="hljs-function">(<span class="hljs-params">{ children }</span>) =&gt;</span> {
+    <span class="hljs-comment">//   const [quiz, setQuiz] = useState(null);</span>
+    <span class="hljs-keyword">const</span> [quiz, setQuiz] = useState({ <span class="hljs-attr">response_code</span>: <span class="hljs-number">-1</span>, <span class="hljs-attr">results</span>: [] });
+
+
+    <span class="hljs-keyword">return</span> (
+        <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">QuizContext.Provider</span> <span class="hljs-attr">value</span>=<span class="hljs-string">{</span> { <span class="hljs-attr">quiz</span>, <span class="hljs-attr">setQuiz</span> } }&gt;</span>
+            { children }
+        <span class="hljs-tag">&lt;/<span class="hljs-name">QuizContext.Provider</span>&gt;</span></span>
+    );
+};
+</div></code></pre>
+<h2 id="file-quizformjsx">file QuizForm.jsx</h2>
+<pre class="hljs"><code><div>
+<span class="hljs-keyword">import</span> { useState } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { Container, Accordion, Form } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap'</span>;
+<span class="hljs-keyword">import</span> Row <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap/Row'</span>;
+<span class="hljs-keyword">import</span> Col <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap/Col'</span>;
+<span class="hljs-keyword">import</span> data <span class="hljs-keyword">from</span> <span class="hljs-string">'../categories.json'</span>;
+
+
+<span class="hljs-keyword">import</span> LoadingButton <span class="hljs-keyword">from</span> <span class="hljs-string">'./LoadingButton.jsx'</span>;
+
+<span class="hljs-keyword">import</span> <span class="hljs-string">"../css/App.css"</span>
+
+<span class="hljs-keyword">import</span> { useNavigate } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-router-dom'</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Category</span>(<span class="hljs-params">{ selectedId, setSelectedId }</span>) </span>{
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'dataasdasdsad'</span>, data)
+
+    <span class="hljs-keyword">const</span> handleClick = <span class="hljs-function">(<span class="hljs-params">string</span>) =&gt;</span> {
+        setSelectedId(string);
+    }
+
+    <span class="hljs-keyword">return</span> (
+        <span class="xml"><span class="hljs-tag">&lt;&gt;</span>
+
+            <span class="hljs-tag">&lt;<span class="hljs-name">Accordion.Header</span>&gt;</span>Categories<span class="hljs-tag">&lt;/<span class="hljs-name">Accordion.Header</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">Accordion.Body</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">Row</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'mx-auto'</span>&gt;</span>
+                    { data.map((item, index) =&gt; (
+                        <span class="hljs-tag">&lt;<span class="hljs-name">Col</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{</span> { <span class="hljs-attr">borderRadius:</span> '<span class="hljs-attr">15px</span>', <span class="hljs-attr">cursor:</span> '<span class="hljs-attr">pointer</span>' } } <span class="hljs-attr">lg</span>=<span class="hljs-string">{</span> <span class="hljs-attr">4</span> } <span class="hljs-attr">md</span>=<span class="hljs-string">{</span> <span class="hljs-attr">6</span> } <span class="hljs-attr">sm</span>=<span class="hljs-string">{</span> <span class="hljs-attr">12</span> } <span class="hljs-attr">key</span>=<span class="hljs-string">{</span> <span class="hljs-attr">index</span> } <span class="hljs-attr">onClick</span>=<span class="hljs-string">{</span> () =&gt;</span> handleClick(item.id) } className={ `border p-4 text-center align-middle ${item.id === selectedId ? 'selected' : ''}` }&gt;
+                            { item.name }
+                        <span class="hljs-tag">&lt;/<span class="hljs-name">Col</span>&gt;</span>
+                    )) }
+                <span class="hljs-tag">&lt;/<span class="hljs-name">Row</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">Accordion.Body</span>&gt;</span>
+
+            {/* { selectedId &amp;&amp; <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Selected ID: { selectedId }<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span> } */ }
+        <span class="hljs-tag">&lt;/&gt;</span></span>
+    );
+}
+
+<span class="hljs-keyword">const</span> NoQuestions = <span class="hljs-function">(<span class="hljs-params">{ num, handleChange }</span>) =&gt;</span> {
+    <span class="hljs-keyword">return</span> (
+        <span class="xml"><span class="hljs-tag">&lt;&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">Accordion.Header</span>&gt;</span>Number of Questions<span class="hljs-tag">&lt;/<span class="hljs-name">Accordion.Header</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">Accordion.Body</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'my-2'</span>&gt;</span>Max 50<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">Form.Control</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"Number"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">{</span> <span class="hljs-attr">num</span> } <span class="hljs-attr">onChange</span>=<span class="hljs-string">{</span> <span class="hljs-attr">handleChange</span> } /&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">Accordion.Body</span>&gt;</span>
+        <span class="hljs-tag">&lt;/&gt;</span></span>
+    );
+}
+
+<span class="hljs-keyword">const</span> Difficulty = <span class="hljs-function">(<span class="hljs-params">{ difficulty, setDifficulty }</span>) =&gt;</span> {
+    <span class="hljs-keyword">return</span> (
+        <span class="xml"><span class="hljs-tag">&lt;&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">Accordion.Header</span>&gt;</span>Difficulty<span class="hljs-tag">&lt;/<span class="hljs-name">Accordion.Header</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">Accordion.Body</span>&gt;</span>
+
+                <span class="hljs-tag">&lt;<span class="hljs-name">Row</span>&gt;</span>
+                    { ['Easy', 'Medium', 'Hard'].map((item, index) =&gt; {
+                        return (<span class="hljs-tag">&lt;<span class="hljs-name">Col</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{</span> { <span class="hljs-attr">borderRadius:</span> '<span class="hljs-attr">15px</span>', <span class="hljs-attr">cursor:</span> '<span class="hljs-attr">pointer</span>' } } <span class="hljs-attr">md</span>=<span class="hljs-string">{</span> <span class="hljs-attr">4</span> } <span class="hljs-attr">sm</span>=<span class="hljs-string">{</span> <span class="hljs-attr">12</span> } <span class="hljs-attr">key</span>=<span class="hljs-string">{</span> <span class="hljs-attr">index</span> } <span class="hljs-attr">onClick</span>=<span class="hljs-string">{</span> () =&gt;</span> setDifficulty(item.toLowerCase()) } className={ `border p-4 text-center align-middle ${item.toLowerCase() === difficulty ? 'selected' : ''}` }&gt;
+                            { item }
+                        <span class="hljs-tag">&lt;/<span class="hljs-name">Col</span>&gt;</span>);
+                    }) }
+                <span class="hljs-tag">&lt;/<span class="hljs-name">Row</span>&gt;</span>
+                {/* <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{ difficulty }<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span> */ }
+
+            <span class="hljs-tag">&lt;/<span class="hljs-name">Accordion.Body</span>&gt;</span>
+        <span class="hljs-tag">&lt;/&gt;</span></span>
+    )
+}
+
+<span class="hljs-keyword">const</span> Type = <span class="hljs-function">(<span class="hljs-params">{ type, setType }</span>) =&gt;</span> {
+    <span class="hljs-keyword">return</span> (
+        <span class="xml"><span class="hljs-tag">&lt;&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">Accordion.Header</span>&gt;</span>Type<span class="hljs-tag">&lt;/<span class="hljs-name">Accordion.Header</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">Accordion.Body</span>&gt;</span>
+
+                <span class="hljs-tag">&lt;<span class="hljs-name">Row</span>&gt;</span>
+                    { [{ string: 'Multiple Choice', id: 'multiple' }, { string: 'True / False', id: 'boolean' }].map((item, index) =&gt; {
+                        return (<span class="hljs-tag">&lt;<span class="hljs-name">Col</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{</span> { <span class="hljs-attr">borderRadius:</span> '<span class="hljs-attr">15px</span>', <span class="hljs-attr">cursor:</span> '<span class="hljs-attr">pointer</span>' } } <span class="hljs-attr">md</span>=<span class="hljs-string">{</span> <span class="hljs-attr">6</span> } <span class="hljs-attr">sm</span>=<span class="hljs-string">{</span> <span class="hljs-attr">12</span> } <span class="hljs-attr">key</span>=<span class="hljs-string">{</span> <span class="hljs-attr">index</span> } <span class="hljs-attr">onClick</span>=<span class="hljs-string">{</span> () =&gt;</span> setType(item.id) } className={ `border p-4 text-center align-middle ${item.id === type ? 'selected' : ''}` }&gt;
+                            { item.string }
+                        <span class="hljs-tag">&lt;/<span class="hljs-name">Col</span>&gt;</span>);
+                    }) }
+                <span class="hljs-tag">&lt;/<span class="hljs-name">Row</span>&gt;</span>
+                {/* <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{ type }<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span> */ }
+            <span class="hljs-tag">&lt;/<span class="hljs-name">Accordion.Body</span>&gt;</span>
+        <span class="hljs-tag">&lt;/&gt;</span></span>
+    )
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> QuizForm = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+    <span class="hljs-comment">// console.log('uwuwuwuwuwuwu', "uwuwuwuwuwuwu")</span>
+    <span class="hljs-keyword">const</span> navigate = useNavigate();
+    <span class="hljs-keyword">const</span> [num, setNum] = useState(<span class="hljs-string">''</span>);
+    <span class="hljs-keyword">const</span> [selectedString, setSelectedString] = useState(<span class="hljs-literal">null</span>);
+
+    <span class="hljs-keyword">const</span> [difficulty, setDifficulty] = useState(<span class="hljs-string">''</span>);
+    <span class="hljs-keyword">const</span> [type, setType] = useState(<span class="hljs-string">''</span>);
+
+    <span class="hljs-comment">// const [quiz, setQuiz] = useState({ response_code: -1, results: [] });</span>
+
+    <span class="hljs-keyword">const</span> handleChange = <span class="hljs-function">(<span class="hljs-params">event</span>) =&gt;</span> {
+        <span class="hljs-keyword">const</span> temp = event.target.value;
+        setNum(temp);
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'num'</span>, temp);
+    }
+
+    <span class="hljs-keyword">return</span> (<span class="xml"><span class="hljs-tag">&lt;&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Container</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">Accordion</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">Accordion.Item</span> <span class="hljs-attr">eventKey</span>=<span class="hljs-string">"0"</span>&gt;</span>
+
+                    <span class="hljs-tag">&lt;<span class="hljs-name">NoQuestions</span> <span class="hljs-attr">num</span>=<span class="hljs-string">{</span> <span class="hljs-attr">num</span> } <span class="hljs-attr">handleChange</span>=<span class="hljs-string">{</span> <span class="hljs-attr">handleChange</span> } /&gt;</span>
+
+                <span class="hljs-tag">&lt;/<span class="hljs-name">Accordion.Item</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">Accordion</span>&gt;</span>
+
+            <span class="hljs-tag">&lt;<span class="hljs-name">Accordion</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">Accordion.Item</span> <span class="hljs-attr">eventKey</span>=<span class="hljs-string">"1"</span>&gt;</span>
+
+                    <span class="hljs-tag">&lt;<span class="hljs-name">Category</span> <span class="hljs-attr">selectedId</span>=<span class="hljs-string">{</span> <span class="hljs-attr">selectedString</span> } <span class="hljs-attr">setSelectedId</span>=<span class="hljs-string">{</span> <span class="hljs-attr">setSelectedString</span> } /&gt;</span>
+
+                <span class="hljs-tag">&lt;/<span class="hljs-name">Accordion.Item</span>&gt;</span>
+
+            <span class="hljs-tag">&lt;/<span class="hljs-name">Accordion</span>&gt;</span>
+
+            <span class="hljs-tag">&lt;<span class="hljs-name">Accordion</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">Accordion.Item</span> <span class="hljs-attr">eventKey</span>=<span class="hljs-string">"2"</span>&gt;</span>
+
+                    <span class="hljs-tag">&lt;<span class="hljs-name">Difficulty</span> <span class="hljs-attr">difficulty</span>=<span class="hljs-string">{</span> <span class="hljs-attr">difficulty</span> } <span class="hljs-attr">setDifficulty</span>=<span class="hljs-string">{</span> <span class="hljs-attr">setDifficulty</span> } /&gt;</span>
+
+                <span class="hljs-tag">&lt;/<span class="hljs-name">Accordion.Item</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">Accordion</span>&gt;</span>
+
+            <span class="hljs-tag">&lt;<span class="hljs-name">Accordion</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">Accordion.Item</span> <span class="hljs-attr">eventKey</span>=<span class="hljs-string">"3"</span>&gt;</span>
+
+                    <span class="hljs-tag">&lt;<span class="hljs-name">Type</span> <span class="hljs-attr">type</span>=<span class="hljs-string">{</span> <span class="hljs-attr">type</span> } <span class="hljs-attr">setType</span>=<span class="hljs-string">{</span> <span class="hljs-attr">setType</span> } /&gt;</span>
+
+                <span class="hljs-tag">&lt;/<span class="hljs-name">Accordion.Item</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">Accordion</span>&gt;</span>
+
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"d-grid gap-2"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">LoadingButton</span> <span class="hljs-attr">num</span>=<span class="hljs-string">{</span> <span class="hljs-attr">num</span> } <span class="hljs-attr">selectedString</span>=<span class="hljs-string">{</span> <span class="hljs-attr">selectedString</span> } <span class="hljs-attr">type</span>=<span class="hljs-string">{</span> <span class="hljs-attr">type</span> } <span class="hljs-attr">difficulty</span>=<span class="hljs-string">{</span> <span class="hljs-attr">difficulty</span> } <span class="hljs-attr">navigate</span>=<span class="hljs-string">{</span> <span class="hljs-attr">navigate</span> } /&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;/<span class="hljs-name">Container</span>&gt;</span>
+    <span class="hljs-tag">&lt;/&gt;</span></span>
+    )
+
+
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> QuizForm;
+</div></code></pre>
+<h2 id="file-showquestionsjsx">file ShowQuestions.jsx</h2>
+<pre class="hljs"><code><div>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> Question <span class="hljs-keyword">from</span> <span class="hljs-string">'./Question'</span>;
+<span class="hljs-keyword">import</span> { useNavigate } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-router-dom'</span>
+
+
+<span class="hljs-keyword">import</span> <span class="hljs-string">"../css/App.css"</span>
+<span class="hljs-keyword">import</span> { Modal, Button } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap'</span>;
+
+<span class="hljs-keyword">const</span> ShowQuestions = <span class="hljs-function">(<span class="hljs-params">{ mcqData, selectedOption, setSelectedOption, showResults }</span>) =&gt;</span> {
+    <span class="hljs-keyword">if</span> (mcqData.response_code === <span class="hljs-number">-1</span>) {
+        <span class="hljs-keyword">const</span> navigate = useNavigate();
+
+        <span class="hljs-keyword">return</span> (
+            <span class="xml"><span class="hljs-tag">&lt;&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">Modal</span> <span class="hljs-attr">show</span>=<span class="hljs-string">{</span> <span class="hljs-attr">true</span> } <span class="hljs-attr">onHide</span>=<span class="hljs-string">{</span> () =&gt;</span> {
+                    navigate('/quiz/');
+                } }&gt;
+                    <span class="hljs-tag">&lt;<span class="hljs-name">Modal.Header</span> <span class="hljs-attr">closeButton</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">Modal.Title</span>&gt;</span> Data Error <span class="hljs-tag">&lt;/<span class="hljs-name">Modal.Title</span>&gt;</span>
+                    <span class="hljs-tag">&lt;/<span class="hljs-name">Modal.Header</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">Modal.Body</span>&gt;</span> Don't try to access the url directly or don't refresh the page. <span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span>You will redirected to home page.<span class="hljs-tag">&lt;/<span class="hljs-name">Modal.Body</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">Modal.Footer</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">Button</span> <span class="hljs-attr">variant</span>=<span class="hljs-string">"secondary"</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{</span> () =&gt;</span> {
+                            navigate('/quiz/')
+                        } }&gt;
+                            Close
+                        <span class="hljs-tag">&lt;/<span class="hljs-name">Button</span>&gt;</span>
+                    <span class="hljs-tag">&lt;/<span class="hljs-name">Modal.Footer</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">Modal</span> &gt;</span>
+            <span class="hljs-tag">&lt;/&gt;</span>
+        )
+    }
+
+    return (
+        <span class="hljs-tag">&lt;&gt;</span>
+            {
+                mcqData.map((mcq, index) =&gt; (
+                    <span class="hljs-tag">&lt;<span class="hljs-name">Question</span>
+                        <span class="hljs-attr">key</span>=<span class="hljs-string">{</span> <span class="hljs-attr">index</span> }
+                        <span class="hljs-attr">question</span>=<span class="hljs-string">{</span> <span class="hljs-attr">mcq</span> }
+                        <span class="hljs-attr">index</span>=<span class="hljs-string">{</span> <span class="hljs-attr">index</span> }
+                        <span class="hljs-attr">selectedOption</span>=<span class="hljs-string">{</span> <span class="hljs-attr">selectedOption</span> }
+                        <span class="hljs-attr">setSelectedOption</span>=<span class="hljs-string">{</span> <span class="hljs-attr">setSelectedOption</span> }
+                        <span class="hljs-attr">showResults</span>=<span class="hljs-string">{</span> <span class="hljs-attr">showResults</span> }
+                    /&gt;</span>
+                ))
+            }
+        <span class="hljs-tag">&lt;/&gt;</span></span>
+    )
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> ShowQuestions;
+
+</div></code></pre>
+<h2 id="file-testjs">file test.js</h2>
+<pre class="hljs"><code><div>
+<span class="hljs-keyword">let</span> count = <span class="hljs-number">10</span>;
+<span class="hljs-keyword">const</span> timer = setInterval(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(count);
+    count--;
+    <span class="hljs-keyword">if</span> (count === <span class="hljs-number">0</span>) {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Liftoff!'</span>);
+        clearInterval(timer);
+    }
+}, <span class="hljs-number">1000</span>);
+</div></code></pre>
+<h2 id="file-themeselectorjsx">file ThemeSelector.jsx</h2>
+<pre class="hljs"><code><div>
+<span class="hljs-keyword">import</span> { useState, useEffect } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { Dropdown } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap'</span>;
+
+
+
+<span class="hljs-keyword">const</span> IS_SERVER = <span class="hljs-keyword">typeof</span> <span class="hljs-built_in">window</span> === <span class="hljs-string">'undefined'</span>;
+
+<span class="hljs-keyword">let</span> storedTheme = IS_SERVER ? <span class="hljs-string">'light'</span> : localStorage.getItem(<span class="hljs-string">'theme'</span>);
+
+<span class="hljs-keyword">const</span> arrayOfThemes = [
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">'Light'</span>, <span class="hljs-attr">icon</span>: <span class="hljs-string">'☀️'</span> },
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">'Dark'</span>, <span class="hljs-attr">icon</span>: <span class="hljs-string">'🌙'</span> },
+    <span class="hljs-comment">// { name: 'Blue', icon: '🟦' }, //Add your own themes!</span>
+];
+
+<span class="hljs-comment">//Modifies the html root element</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">modifyDOM</span>(<span class="hljs-params">theme</span>) </span>{
+    <span class="hljs-keyword">if</span> (
+        theme === <span class="hljs-string">'dark'</span> &amp;&amp;
+        <span class="hljs-built_in">window</span>.matchMedia(<span class="hljs-string">'(prefers-color-scheme: dark)'</span>).matches
+    ) {
+        <span class="hljs-built_in">document</span>.documentElement.setAttribute(<span class="hljs-string">'data-bs-theme'</span>, <span class="hljs-string">'dark'</span>);
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-built_in">document</span>.documentElement.setAttribute(<span class="hljs-string">'data-bs-theme'</span>, theme);
+    }
+}
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">'"ran"'</span>, <span class="hljs-string">"ran"</span>)
+
+<span class="hljs-keyword">const</span> ThemeSelector = <span class="hljs-function">(<span class="hljs-params">{ theme, setTheme }</span>) =&gt;</span> {
+    <span class="hljs-keyword">const</span> [mode, setMode] = useState(getPreferredTheme());
+
+    useEffect(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+        <span class="hljs-keyword">if</span> (IS_SERVER) <span class="hljs-keyword">return</span>;
+        modifyDOM(mode);
+    }, []);
+
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getPreferredTheme</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">if</span> (storedTheme) {
+            <span class="hljs-keyword">return</span> storedTheme;
+        }
+
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">window</span>.matchMedia(<span class="hljs-string">'(prefers-color-scheme: dark)'</span>).matches
+            ? <span class="hljs-string">'dark'</span>
+            : <span class="hljs-string">'light'</span>;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setPreferredTheme</span>(<span class="hljs-params">theme</span>) </span>{
+        modifyDOM(theme)
+
+        localStorage.setItem(<span class="hljs-string">'theme'</span>, theme);
+        setMode(theme);
+    }
+
+    <span class="hljs-keyword">const</span> toggleTheme = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+        setTheme(theme === <span class="hljs-string">'light'</span> ? <span class="hljs-string">'dark'</span> : <span class="hljs-string">'light'</span>);
+    };
+
+    <span class="hljs-keyword">return</span> (
+        <span class="xml"><span class="hljs-tag">&lt;&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">Dropdown</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'position-absolute end-0'</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">Dropdown.Toggle</span> <span class="hljs-attr">variant</span>=<span class="hljs-string">"primary"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"dropdown-basic"</span> &gt;</span>
+
+                    {
+                        arrayOfThemes.find((theme) =&gt; theme.name.toLowerCase() === mode)
+                            ?.icon
+                    }{ ' ' }
+
+                <span class="hljs-tag">&lt;/<span class="hljs-name">Dropdown.Toggle</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">Dropdown.Menu</span>&gt;</span>
+
+                    { arrayOfThemes.map((theme) =&gt; {
+                        const active = mode === theme.name.toLowerCase();
+                        return (
+                            <span class="hljs-tag">&lt;<span class="hljs-name">Dropdown.Item</span>
+                                <span class="hljs-attr">key</span>=<span class="hljs-string">{</span> <span class="hljs-attr">theme.name</span> }
+                                <span class="hljs-attr">className</span>=<span class="hljs-string">{</span> <span class="hljs-attr">active</span> ? '<span class="hljs-attr">active</span>' <span class="hljs-attr">:</span> '' }
+                                <span class="hljs-attr">onClick</span>=<span class="hljs-string">{</span> () =&gt;</span> {
+                                    setPreferredTheme(theme.name.toLocaleLowerCase());
+                                } }
+                            &gt;
+                                { ' ' }
+                                { theme.icon } { theme.name } { active ? '✔️' : '' }
+                            <span class="hljs-tag">&lt;/<span class="hljs-name">Dropdown.Item</span>&gt;</span>
+                        );
+                    }) }
+                <span class="hljs-tag">&lt;/<span class="hljs-name">Dropdown.Menu</span>&gt;</span>
+
+            <span class="hljs-tag">&lt;/<span class="hljs-name">Dropdown</span> &gt;</span>
+
+        <span class="hljs-tag">&lt;/&gt;</span>
+    );
+};
+
+export default ThemeSelector;
+</span></div></code></pre>
+<h2 id="file-togglejsx">file Toggle.jsx</h2>
+<pre class="hljs"><code><div>
+<span class="hljs-keyword">import</span> <span class="hljs-string">'../css/Toggle.css'</span>;
+<span class="hljs-keyword">import</span> { Container } <span class="hljs-keyword">from</span> <span class="hljs-string">"react-bootstrap"</span>;
+
+<span class="hljs-keyword">const</span> ToggleSwitch = <span class="hljs-function">(<span class="hljs-params">{ group, setGroup }</span>) =&gt;</span> {
+    <span class="hljs-comment">// const [isChecked, setIsChecked] = useState(false);</span>
+
+    <span class="hljs-keyword">const</span> handleOnChange = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+        setGroup(!group);
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Gorup <span class="hljs-subst">${group ? <span class="hljs-string">'OFF'</span> : <span class="hljs-string">'ON'</span>}</span>`</span>);
+    };
+
+    <span class="hljs-keyword">return</span> (
+        <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Container</span>&gt;</span>
+            Group Answers
+            <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"switch position-relative start-0 m-3"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">input</span>
+                    <span class="hljs-attr">type</span>=<span class="hljs-string">"checkbox"</span>
+                    <span class="hljs-attr">checked</span>=<span class="hljs-string">{</span> <span class="hljs-attr">group</span> }
+                    <span class="hljs-attr">onChange</span>=<span class="hljs-string">{</span> <span class="hljs-attr">handleOnChange</span> }
+                /&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"slider round"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">Container</span>&gt;</span></span>
+    );
+};
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> ToggleSwitch;
+</div></code></pre>
+<h2 id="file-appcss">file App.css</h2>
+<pre class="hljs"><code><div>
+#root {
+  <span class="hljs-attr">width</span>: <span class="hljs-number">100</span>%;
+  padding: <span class="hljs-number">50</span>px;
+  font-size: <span class="hljs-number">1</span>em;
+}
+
+<span class="hljs-comment">/* for proper color in grid selection (quiz categories) */</span>
+:root {
+  --selected-color-light: #BFC9CA;
+  <span class="hljs-comment">/* Light theme selected color */</span>
+  --selected-color-dark: #<span class="hljs-number">34495</span>E;
+  <span class="hljs-comment">/* Dark theme selected color */</span>
+}
+
+[data-bs-theme=<span class="hljs-string">"light"</span>] .selected {
+  background-color: <span class="hljs-keyword">var</span>(--selected-color-light);
+}
+
+[data-bs-theme=<span class="hljs-string">"dark"</span>] .selected {
+  background-color: <span class="hljs-keyword">var</span>(--selected-color-dark);
+}
+
+.row-height {
+  <span class="hljs-attr">height</span>: <span class="hljs-number">70</span>px;
+}
+
+.rounded-card {
+  border-radius: <span class="hljs-number">25</span>px;
+}
+
+.rounded-header {
+  border-radius: <span class="hljs-number">25</span>px <span class="hljs-number">25</span>px <span class="hljs-number">0</span> <span class="hljs-number">0</span>;
+}
+
+.rounded-list {
+  border-radius: <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">25</span>px <span class="hljs-number">25</span>px;
+}
+
+.rounded-item {
+  border-radius: <span class="hljs-number">25</span>px;
+}
+</div></code></pre>
+<h2 id="file-indexcss">file index.css</h2>
+<pre class="hljs"><code><div>
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-size: <span class="hljs-number">1.5</span>em;
+  line-height: <span class="hljs-number">1.5</span>;
+  font-weight: <span class="hljs-number">400</span>;
+
+  color-scheme: light dark;
+  color: rgba(<span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">0.87</span>);
+  background-color: #<span class="hljs-number">242424</span>;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: <span class="hljs-number">500</span>;
+  color: #<span class="hljs-number">646</span>cff;
+  text-decoration: inherit;
+}
+
+<span class="hljs-attr">a</span>:hover {
+  <span class="hljs-attr">color</span>: #<span class="hljs-number">535</span>bf2;
+}
+
+body {
+  <span class="hljs-attr">margin</span>: <span class="hljs-number">0</span>;
+  display: flex;
+  place-items: center;
+  min-width: <span class="hljs-number">320</span>px;
+  min-height: <span class="hljs-number">100</span>vh;
+}
+
+h1 {
+  font-size: <span class="hljs-number">3.2</span>em;
+  line-height: <span class="hljs-number">1.1</span>;
+}
+
+button {
+  border-radius: <span class="hljs-number">8</span>px;
+  border: <span class="hljs-number">1</span>px solid transparent;
+  padding: <span class="hljs-number">0.6</span>em <span class="hljs-number">1.2</span>em;
+  font-size: <span class="hljs-number">1</span>em;
+  font-weight: <span class="hljs-number">500</span>;
+  font-family: inherit;
+  background-color: #<span class="hljs-number">1</span>a1a1a;
+  cursor: pointer;
+  transition: border-color <span class="hljs-number">0.25</span>s;
+}
+
+<span class="hljs-attr">button</span>:hover {
+  border-color: #<span class="hljs-number">646</span>cff;
+}
+
+<span class="hljs-attr">button</span>:focus,
+<span class="hljs-attr">button</span>:focus-visible {
+  <span class="hljs-attr">outline</span>: <span class="hljs-number">4</span>px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    <span class="hljs-attr">color</span>: #<span class="hljs-number">213547</span>;
+    background-color: #ffffff;
+  }
+
+  <span class="hljs-attr">a</span>:hover {
+    <span class="hljs-attr">color</span>: #<span class="hljs-number">747</span>bff;
+  }
+
+  button {
+    background-color: #f9f9f9;
+  }
+}
+</div></code></pre>
+<h2 id="file-togglecss">file Toggle.css</h2>
+<pre class="hljs"><code><div>
+<span class="hljs-comment">/* 
+Credits: w3schools
+Link: https://www.w3schools.com/howto/howto_css_switch.asp
+*/</span>
+
+<span class="hljs-comment">/* The switch - the box around the slider */</span>
+.switch {
+  <span class="hljs-attr">position</span>: relative;
+  display: inline-block;
+  width: <span class="hljs-number">60</span>px;
+  height: <span class="hljs-number">34</span>px;
+}
+
+<span class="hljs-comment">/* Hide default HTML checkbox */</span>
+.switch input {
+  <span class="hljs-attr">opacity</span>: <span class="hljs-number">0</span>;
+  width: <span class="hljs-number">0</span>;
+  height: <span class="hljs-number">0</span>;
+}
+
+<span class="hljs-comment">/* The slider */</span>
+.slider {
+  <span class="hljs-attr">position</span>: absolute;
+  cursor: pointer;
+  top: <span class="hljs-number">0</span>;
+  left: <span class="hljs-number">0</span>;
+  right: <span class="hljs-number">0</span>;
+  bottom: <span class="hljs-number">0</span>;
+  background-color: #ccc;
+  -webkit-transition: <span class="hljs-number">.4</span>s;
+  transition: <span class="hljs-number">.4</span>s;
+}
+
+.slider:before {
+  <span class="hljs-attr">position</span>: absolute;
+  content: <span class="hljs-string">""</span>;
+  height: <span class="hljs-number">26</span>px;
+  width: <span class="hljs-number">26</span>px;
+  left: <span class="hljs-number">4</span>px;
+  bottom: <span class="hljs-number">4</span>px;
+  background-color: white;
+  -webkit-transition: <span class="hljs-number">.4</span>s;
+  transition: <span class="hljs-number">.4</span>s;
+}
+
+<span class="hljs-attr">input</span>:checked + .slider {
+  background-color: #<span class="hljs-number">2196</span>F3;
+}
+
+<span class="hljs-attr">input</span>:focus + .slider {
+  box-shadow: <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">1</span>px #<span class="hljs-number">2196</span>F3;
+}
+
+<span class="hljs-attr">input</span>:checked + .slider:before {
+  -webkit-transform: translateX(<span class="hljs-number">26</span>px);
+  -ms-transform: translateX(<span class="hljs-number">26</span>px);
+  transform: translateX(<span class="hljs-number">26</span>px);
+}
+
+<span class="hljs-comment">/* Rounded sliders */</span>
+.slider.round {
+  border-radius: <span class="hljs-number">34</span>px;
+}
+
+.slider.round:before {
+  border-radius: <span class="hljs-number">50</span>%;
+}
+</div></code></pre>
+
+</body>
+</html>
